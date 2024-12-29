@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - dotnet build -c Debug
+
+  build-release:
+    cmds:
+      - dotnet build -c Release
+  run-release:
+    cmds:
+      - dotnet run --project Csharp/Csharp.csproj -c Release
+  test:
+    cmds:
+      - dotnet test
