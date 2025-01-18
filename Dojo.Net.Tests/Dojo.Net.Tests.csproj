@@ -9,6 +9,8 @@
     <IsTestProject>true</IsTestProject>
 
     <RunSettingsFilePath>xunit.runsettings</RunSettingsFilePath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+
 
   </PropertyGroup>
 
@@ -27,7 +29,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Csharp\Csharp.csproj" />
+    <ProjectReference Include="../Dojo.Net/Dojo.Net.csproj" />
   </ItemGroup>
 
 </Project>

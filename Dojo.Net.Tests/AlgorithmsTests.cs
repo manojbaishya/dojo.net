@@ -5,7 +5,7 @@ using Xunit.Abstractions;
 using FluentAssertions;
 using System.Numerics;
 
-namespace Csharp.Tests;
+namespace Dojo.Net.Tests;
 
 public class CartItemTests(ITestOutputHelper logger)
 {

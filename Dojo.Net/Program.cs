@@ -3,7 +3,7 @@ using System.Linq;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 
-namespace Csharp;
+namespace Dojo.Net;
 
 public class Program
 {
