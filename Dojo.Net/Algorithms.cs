@@ -68,12 +68,12 @@ public class Polynomial(params double[] coefficients)
     }
 
     private static Complex[] ComputeFft(double[] coefficients, int degreeBound) {
-        if (degreeBound == 1) return coefficients.Select(x => new Complex(x, 0)).ToArray();
+        if (degreeBound == 1) return [.. coefficients.Select(x => new Complex(x, 0))];
         var wn = Complex.Exp(2 * Math.PI * Complex.ImaginaryOne / degreeBound);
         var w = new Complex(1, 0);
 
-        Complex[] fftEven = ComputeFft(coefficients.Where((_, i) => i % 2 == 0).ToArray(), degreeBound / 2);
-        Complex[] fftOdd = ComputeFft(coefficients.Where((_, i) => i % 2 == 1).ToArray(), degreeBound / 2);
+        Complex[] fftEven = ComputeFft([.. coefficients.Where((_, i) => i % 2 == 0)], degreeBound / 2);
+        Complex[] fftOdd = ComputeFft([.. coefficients.Where((_, i) => i % 2 == 1)], degreeBound / 2);
 
         Complex[] fft = new Complex[degreeBound];
         for (int i = 0; i < degreeBound / 2; i++) {
@@ -95,3 +95,4 @@ public class Polynomial(params double[] coefficients)
         return polynomial;
     }
 }
+
