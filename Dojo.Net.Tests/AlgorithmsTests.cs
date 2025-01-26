@@ -10,17 +10,17 @@ namespace Dojo.Net.Tests;
 public class CartItemTests(ITestOutputHelper logger)
 {
 
-    private readonly ITestOutputHelper logger = logger;
+    private readonly ITestOutputHelper _logger = logger;
 
     [Fact]
     public void TestTotal()
     {
         IList<CartItem> cartItems = [new CartItem { Price = 20 }, new CartItem { Price = 30 }];
 
-        var expectedTotalPrice = 50;
-        var actualTotalPrice = cartItems.Sum(x => x.Price);
+        const int expectedTotalPrice = 50;
+        double actualTotalPrice = cartItems.Sum(x => x.Price);
 
-        logger.WriteLine($"Actual Total Price is: '{actualTotalPrice}'");
+        _logger.WriteLine($"Actual Total Price is: '{actualTotalPrice}'");
 
         actualTotalPrice.Should().Be(expectedTotalPrice, "because actualTotalPrice is equal to expectedTotalPrice.");
     }
