@@ -1,37 +1,39 @@
+using System;
+
 namespace Dojo.Net.Leetcode;
 
 public class MedianOfTwoSortedArraysSolution
 {
     public double FindMedianSortedArrays(int[] nums1, int[] nums2)
     {
-        double medianNums1 = nums1.Length > 0 ? FindMedianSortedArray(nums1) : 0;
-        double medianNums2 = nums2.Length > 0 ? FindMedianSortedArray(nums2) : 0;
-        
-        return Median(medianNums1, medianNums2);
-    }
-    
-    private static double Median(double median1, double median2)
-    {
-        if (median1 == 0) return median2;
-        else if (median2 == 0) return median1;
-        else return (median1 + median2) / 2.0;
-    }
-    private static double FindMedianSortedArray(int[] A)
-    {
-        int k = A.Length;
-        double median = 0;
-        if (k % 2 != 0)
-        {
-            int midx = k / 2;
-            median = A[midx];
-        }
-        else if (k % 2 == 0)
-        {
-            int midx = k / 2;
-            double medianX2 = A[midx - 1] + A[midx];
-            median = medianX2 / 2;
-        }
 
-        return median;
+        var (ArrSmall, ArrLarge) = nums1.Length < nums2.Length ? (nums1, nums2) : (nums2, nums1);
+
+        int totalSize = ArrSmall.Length + ArrLarge.Length;
+        int midSize = totalSize / 2;
+        int leftPtr = 0, rightPtr = ArrSmall.Length - 1;
+
+        while (true)
+        {
+            int i = (leftPtr + rightPtr) >> 1;
+            int j = midSize - i - 2;
+
+            int ArrSmallLeftMax = i >= 0 ? ArrSmall[i] : int.MinValue;
+            int ArrLargeRightMin = j + 1 < ArrLarge.Length ? ArrLarge[j + 1] : int.MaxValue;
+
+            int ArrLargeLeftMax = j >= 0 ? ArrLarge[j] : int.MinValue;
+            int ArrSmallRightMin = i + 1 < ArrSmall.Length ? ArrSmall[i + 1] : int.MaxValue;
+
+            if (ArrSmallLeftMax <= ArrLargeRightMin && ArrLargeLeftMax <= ArrSmallRightMin)
+            {
+                if (totalSize % 2 != 0)
+                    return Math.Min(ArrSmallRightMin, ArrLargeRightMin);
+                else
+                    return (Math.Max(ArrSmallLeftMax, ArrLargeLeftMax) + Math.Min(ArrSmallRightMin, ArrLargeRightMin)) / 2.0;
+            }
+            else if (ArrSmallLeftMax > ArrLargeRightMin) rightPtr = i - 1;
+            else leftPtr = i + 1;
+        }
     }
+
 }
