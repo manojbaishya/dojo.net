@@ -1,6 +1,6 @@
 namespace Dojo.Net.Leetcode;
 
-public class MedianOfTwoSortedArrays
+public class MedianOfTwoSortedArraysSolution
 {
     public double FindMedianSortedArrays(int[] nums1, int[] nums2)
     {
