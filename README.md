@@ -17,11 +17,11 @@ Computer Science problems in .NET.
 - Parenthesis Problems - Stack
 - DP - Knapsack Problem
 
-## Interview Timeline:
+## Skill Timeline:
 
 ✅Build a strong foundation (WEEKS 1-4)
 
-🎯 Focus on the most frequently asked topics:
+🎯 Focus on the most frequently used topics:
 - Arrays: Prefix sum, sliding window problems.
 - Strings: Two-pointer technique, pattern matching.
 - Linked Lists: Reversal, cycle detection.
@@ -29,8 +29,6 @@ Computer Science problems in .NET.
 
 🎯 Resources:
 - Neetcode 150 for a structured problem set.
-- Cracking the Coding Interview:
-Chapters 1-4 for basics.
 - Take U Forward (YouTube): Great explanation for each video.
 - GFG: Topic-wise problems with solutions.
 
@@ -58,8 +56,7 @@ Chapters 1-4 for basics.
 
 🎯 Resources:
 - Neetcode Playlists: Trees, DP, and Graphs.
-- Tushar Roy YouTube Channel:
-Algorithm deep dives.
+- Tushar Roy YouTube Channel: Algorithm deep dives.
 - LeetCode Discussion Forums:
 Optimized solutions and hints.
 
@@ -74,8 +71,7 @@ Optimized solutions and hints.
 🎯 Resources:
 - System Design Primer (GitHub): Beginner to advanced.
 - Grokking the System Design Interview: Simplified concepts.
-- Designing Data-Intensive
-Applications: Real-world system insights.
+- Designing Data-Intensive Applications: Real-world system insights.
 
 ✅ Mock Interviews and Communication (WEEKS 21-24)
 
