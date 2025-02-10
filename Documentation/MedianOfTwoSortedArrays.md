@@ -8,7 +8,7 @@ While there are the multiple important metrics that can give insight into the da
 
 This kind of "sub-problem", lets's assume, frequently arises in the context of sensor networks, search engines, sequence alignment in bioinformatics, etc.
 
-The question is framed as follows: given two sorted lists S and B of sizes N1 and N2, the problem is to efficiently find the median of the combined list without explicitly merging them."
+The question is framed as follows: given two sorted lists S and B of sizes N1 and N2, the problem is to efficiently find the median of the combined list without explicitly merging them.
 
 One thing we can do is merge the two lists, sort them and then compute the median from the middle indices. But each step in that pipeline does a lot of work - in total O(N1 + N2) + O((N1 + N2) x log2(N1 + N2))!
 
