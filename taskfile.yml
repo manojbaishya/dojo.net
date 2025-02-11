@@ -1,0 +1,16 @@
+version: '3'
+
+tasks:
+  build:
+    cmds:
+      - dotnet build Dojo.Net.sln -c Debug
+
+  build-release:
+    cmds:
+      - dotnet build Dojo.Net.sln -c Release
+  run-release:
+    cmds:
+      - dotnet run Dojo.Net.sln --project Dojo.Net/Dojo.Net.csproj -c Release
+  test:
+    cmds:
+      - dotnet test
