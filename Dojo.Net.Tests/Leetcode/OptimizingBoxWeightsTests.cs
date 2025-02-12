@@ -1,4 +1,3 @@
-using System.Collections;
 using Dojo.Net.Leetcode;
 using JetBrains.Annotations;
 using Xunit;
