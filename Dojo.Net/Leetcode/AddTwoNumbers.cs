@@ -28,7 +28,7 @@ public class AddTwoNumbersSolution
             if (sum > 9)
             {
                 carryover = 1;
-                sum = sum % 10;
+                sum %= 10;
             }
             else
             {
@@ -48,8 +48,10 @@ public class AddTwoNumbersSolution
 
         if (carryover == 1)
         {
-            sumNode.Next = new ListNode();
-            sumNode.Next.Val = carryover;
+            sumNode.Next = new ListNode
+            {
+                Val = carryover
+            };
         }
         
         return head;

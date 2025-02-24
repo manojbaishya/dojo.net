@@ -20,7 +20,7 @@ public class LongestSubstringWithoutRepeatingCharactersSolution
                 start++;
             }
             bool added = uniqueCharset.Add(c);
-            if (added) maxLength = Math.Max(maxLength, (end + 1) - start);
+            if (added) maxLength = Math.Max(maxLength, end + 1 - start);
         }
         
         return maxLength != int.MinValue ? maxLength : 0;
