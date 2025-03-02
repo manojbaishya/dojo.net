@@ -56,5 +56,19 @@ public class PatternsIterationsAndConditionalsTest
         sut.NTriangleRows(n);
     }
 
-
+    [Fact]
+    public void Seeding()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.Seeding(n);
+    }
+    
+    [Fact]
+    public void NNumberTriangle()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.NNumberTriangle(n);
+    }
 }

@@ -12,10 +12,11 @@ public class PatternsIterationsAndConditionals
             {
                 Console.Write("*");
             }
+
             Console.WriteLine();
         }
     }
-    
+
     public void NDimensionalForestCacheArray(int n)
     {
         char[] line = new char[n];
@@ -23,6 +24,7 @@ public class PatternsIterationsAndConditionals
         {
             line[j] = '*';
         }
+
         for (int i = 0; i < n; i++)
         {
             Console.WriteLine(line);
@@ -37,6 +39,7 @@ public class PatternsIterationsAndConditionals
             {
                 Console.Write("*");
             }
+
             Console.WriteLine();
         }
     }
@@ -50,10 +53,11 @@ public class PatternsIterationsAndConditionals
                 int compute = j + 1; // NxN compute steps
                 Console.Write(compute);
             }
+
             Console.WriteLine();
         }
     }
-    
+
     public void NTriangleCached(int n)
     {
         int[] cache = new int[n];
@@ -65,10 +69,11 @@ public class PatternsIterationsAndConditionals
             {
                 Console.Write(cache[j]);
             }
+
             Console.WriteLine();
         }
     }
-    
+
     public void NTriangleRows(int n)
     {
         for (int i = 0; i < n; i++)
@@ -76,6 +81,31 @@ public class PatternsIterationsAndConditionals
             for (int j = 0; j <= i; j++)
             {
                 Console.Write(i + 1);
+            }
+
+            Console.WriteLine();
+        }
+    }
+
+    public void Seeding(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n - i; j++)
+            {
+                Console.Write('*');
+            }
+            Console.WriteLine();
+        }
+    }
+
+    public void NNumberTriangle(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n - i; j++)
+            {
+                Console.Write(j + 1);
             }
             Console.WriteLine();
         }
