@@ -71,4 +71,12 @@ public class PatternsIterationsAndConditionalsTest
         var sut = new PatternsIterationsAndConditionals();
         sut.NNumberTriangle(n);
     }
+    
+    [Fact]
+    public void NStarTriangle()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.NStarTriangle(n);
+    }
 }

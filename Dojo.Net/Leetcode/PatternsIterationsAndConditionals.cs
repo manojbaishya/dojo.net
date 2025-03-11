@@ -110,4 +110,22 @@ public class PatternsIterationsAndConditionals
             Console.WriteLine();
         }
     }
+
+    public void NStarTriangle(int n)
+    {
+        const int a0 = 1;
+        const int del = 2;
+        int l = a0 + (n - 1) * del;
+        for (int i = 0; i < n; i++)
+        {
+            int c = a0 + i * del;
+            for (int j = 0; j < l; j++)
+            {
+                if (l - n - i < j && j < l - n - i + c + 1) Console.Write('*');
+                else Console.Write(' ');
+            }
+            Console.WriteLine();
+        }
+        
+    }
 }
