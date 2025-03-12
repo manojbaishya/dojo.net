@@ -119,9 +119,10 @@ public class PatternsIterationsAndConditionals
         for (int i = 0; i < n; i++)
         {
             int c = a0 + i * del;
+            int sp = (l - c) / 2;
             for (int j = 0; j < l; j++)
             {
-                if (l - n - i < j && j < l - n - i + c + 1) Console.Write('*');
+                if (sp <= j && j < l - sp) Console.Write('*');
                 else Console.Write(' ');
             }
             Console.WriteLine();
