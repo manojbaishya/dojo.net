@@ -119,4 +119,12 @@ public class PatternsIterationsAndConditionalsTest
         var sut = new PatternsIterationsAndConditionals();
         sut.McDonalds(n);
     }
+    
+    [Fact]
+    public void IncrementalNumbers()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.IncrementalNumbers(n);
+    }
 }

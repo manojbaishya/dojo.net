@@ -189,4 +189,18 @@ public class PatternsIterationsAndConditionals
             Console.WriteLine();
         }
     }
+    
+    public void IncrementalNumbers(int n)
+    {
+        int marker = 1;
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < i + 1; j++)
+            {
+                Console.Write($"{marker} ");
+                marker++;
+            }
+            Console.WriteLine();
+        }
+    }
 }
