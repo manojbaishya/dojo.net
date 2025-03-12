@@ -143,4 +143,12 @@ public class PatternsIterationsAndConditionalsTest
         var sut = new PatternsIterationsAndConditionals();
         sut.Ribbon(n);
     }
+    
+    [Fact]
+    public void NumSquare()
+    {
+        int n = 4;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.NumSquare(n);
+    }
 }

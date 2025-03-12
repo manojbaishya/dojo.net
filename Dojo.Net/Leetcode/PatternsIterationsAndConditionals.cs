@@ -286,4 +286,23 @@ public class PatternsIterationsAndConditionals
             Console.WriteLine();
         }
     }
+
+    public void NumSquare(int n)
+    {
+        int rows = 2 * n - 1;
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < rows; j++)
+            {
+                int top = i;
+                int left = j;
+                int right = rows - 1 - j;
+                int bottom = rows - 1 - i;
+                
+                int compute = n - Math.Min(Math.Min(left, right), Math.Min(top, bottom));
+                Console.Write(compute);
+            }
+            Console.WriteLine();
+        }
+    }
 }
