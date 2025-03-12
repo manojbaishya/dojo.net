@@ -135,4 +135,12 @@ public class PatternsIterationsAndConditionalsTest
         var sut = new PatternsIterationsAndConditionals();
         sut.Diamond(n);
     }
+    
+    [Fact]
+    public void Ribbon()
+    {
+        int n = 5;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.Ribbon(n);
+    }
 }
