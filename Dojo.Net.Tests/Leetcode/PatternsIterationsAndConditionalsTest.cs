@@ -127,4 +127,12 @@ public class PatternsIterationsAndConditionalsTest
         var sut = new PatternsIterationsAndConditionals();
         sut.IncrementalNumbers(n);
     }
+    
+    [Fact]
+    public void Diamond()
+    {
+        int n = 10;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.Diamond(n);
+    }
 }

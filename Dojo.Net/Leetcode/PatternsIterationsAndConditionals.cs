@@ -1,4 +1,5 @@
 ﻿using System;
+using Perfolizer.Mathematics.Cpd;
 
 namespace Dojo.Net.Leetcode;
 
@@ -199,6 +200,47 @@ public class PatternsIterationsAndConditionals
             {
                 Console.Write($"{marker} ");
                 marker++;
+            }
+            Console.WriteLine();
+        }
+    }
+    
+    public void Diamond(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < n - i; j++)
+            {
+                Console.Write('*');
+            }
+
+            for (int j = 0; j < 2 * i; j++)
+            {
+                Console.Write(' ');
+            }
+            
+            for (int j = 0; j < n - i; j++)
+            {
+                Console.Write('*');
+            }
+            Console.WriteLine();
+        }
+        
+        for (int i = 0; i < n; i++)
+        {
+            for (int j = 0; j < i + 1; j++)
+            {
+                Console.Write('*');
+            }
+
+            for (int j = 0; j < 2 * n - 2 * (i + 1); j++)
+            {
+                Console.Write(' ');
+            }
+            
+            for (int j = 0; j < i + 1; j++)
+            {
+                Console.Write('*');
             }
             Console.WriteLine();
         }
