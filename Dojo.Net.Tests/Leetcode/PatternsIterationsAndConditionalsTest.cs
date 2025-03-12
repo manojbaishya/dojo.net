@@ -79,4 +79,44 @@ public class PatternsIterationsAndConditionalsTest
         var sut = new PatternsIterationsAndConditionals();
         sut.NStarTriangle(n);
     }
+    
+    [Fact]
+    public void NStarTriangleReversed()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.NStarTriangleReversed(n);
+    }
+    
+    [Fact]
+    public void NStarTriangleDouble()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.NStarTriangleDouble(n);
+    }
+    
+    [Fact]
+    public void NStarTriangleDoubleOneSided()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.NStarTriangleDoubleOneSided(n);
+    }
+    
+    [Fact]
+    public void NTriangleBinary()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.NTriangleBinary(n);
+    }
+    
+    [Fact]
+    public void McDonalds()
+    {
+        int n = 9;
+        var sut = new PatternsIterationsAndConditionals();
+        sut.McDonalds(n);
+    }
 }

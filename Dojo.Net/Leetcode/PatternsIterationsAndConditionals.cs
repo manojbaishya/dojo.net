@@ -127,6 +127,66 @@ public class PatternsIterationsAndConditionals
             }
             Console.WriteLine();
         }
-        
+    }
+    
+    public void NStarTriangleReversed(int n)
+    {
+        const int a0 = 1;
+        const int del = 2;
+        int l = a0 + (n - 1) * del;
+        for (int i = 0; i < n; i++)
+        {
+            int c = a0 + i * del;
+            int sp = i * 2;
+            for (int j = 0; j < l; j++)
+            {
+                if (sp <= j && j < l - sp) Console.Write('*');
+                else Console.Write(' ');
+            }
+            Console.WriteLine();
+        }
+    }
+
+    public void NStarTriangleDouble(int n)
+    {
+        NStarTriangle(n);
+        NStarTriangleReversed(n);
+    }
+    
+    public void NStarTriangleDoubleOneSided(int n)
+    {
+        NBy2DimensionalForest(n);
+        Seeding(n - 1);
+    }
+    
+    public void NTriangleBinary(int n)
+    {
+        for (int i = 0; i < n; i++)
+        {
+            int init = i % 2 == 0 ? 1 : 0;
+            for (int j = 0; j <= i; j++)
+            {
+                Console.Write(init);
+                init ^= 1;
+            }
+
+            Console.WriteLine();
+        }
+    }
+    
+    public void McDonalds(int n)
+    {
+        int l = n * 2;
+        for (int i = 0; i < n; i++)
+        {
+            int num = i + 1;
+            for (int j = 0; j < l; j++)
+            {
+                if (num <= j && j < l - num) Console.Write(' ');
+                else if (j < num) Console.Write(j + 1);
+                else Console.Write(l - j);
+            }
+            Console.WriteLine();
+        }
     }
 }
