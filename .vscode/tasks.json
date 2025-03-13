@@ -10,12 +10,6 @@
 			},
 			"problemMatcher": [],
 			"label": "dotnet: build"
-		},
-		{
-			"type": "dotnet",
-			"task": "clean",
-			"problemMatcher": [],
-			"label": "dotnet: clean"
 		}
 	]
 }
