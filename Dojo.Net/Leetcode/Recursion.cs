@@ -44,4 +44,24 @@ public class Recursion
         PrintNTimesReverseBacktracking(iterations + 1, count);
         Console.WriteLine(iterations.ToString());
     }
+
+    public double SumOfCubicSeries(int n) {
+        if (n == 1) return 1;
+        return Math.Pow(n, 3) + SumOfCubicSeries(n - 1);
+    }
+
+    public double SumofCubicSeriesbyFormula(int n) => Math.Pow((n * (n + 1)) / 2, 2);
+
+    public double SumOfNNumbers(int n) {
+        if (n == 1) return 1;
+        return n + SumOfNNumbers(n - 1);
+    }
+
+    public double SumOfNNumbersbyFormula(int n) => (n * (n + 1)) / 2;
+
+    public double Factorial(int n)
+    {
+        if (n == 1) return 1;
+        return n * Factorial(n - 1);
+    }
 }

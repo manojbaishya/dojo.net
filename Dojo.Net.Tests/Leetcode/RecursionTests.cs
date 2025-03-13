@@ -72,4 +72,69 @@ public class RecursionTests
         var sut = new Recursion();
         sut.PrintNTimesReverseBacktracking(1, count);
     }
+
+    [Theory]
+    [InlineData(6, 441)]
+    [InlineData(15, 14400)]
+    [InlineData(14, 11025)]
+    [InlineData(11, 4356)]
+    public void SumOfCubicSeries(int N, double expected)
+    {
+        var sut = new Recursion();
+        double actual = sut.SumOfCubicSeries(N);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(6, 441)]
+    [InlineData(15, 14400)]
+    [InlineData(14, 11025)]
+    [InlineData(11, 4356)]
+    public void SumofCubicSeriesbyFormula(int N, double expected)
+    {
+        var sut = new Recursion();
+        double actual = sut.SumofCubicSeriesbyFormula(N);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(6, 21)]
+    [InlineData(15, 120)]
+    [InlineData(14, 105)]
+    [InlineData(11, 66)]
+    public void SumOfNNumbers(int N, double expected)
+    {
+        var sut = new Recursion();
+        double actual = sut.SumOfNNumbers(N);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(6, 21)]
+    [InlineData(15, 120)]
+    [InlineData(14, 105)]
+    [InlineData(11, 66)]
+    public void SumOfNNumbersbyFormula(int N, double expected)
+    {
+        var sut = new Recursion();
+        double actual = sut.SumOfNNumbersbyFormula(N);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(6, 720)]
+    [InlineData(7, 5040)]
+    [InlineData(9, 362880)]
+    [InlineData(11, 39916800)]
+    public void Factorial(int N, double expected)
+    {
+        var sut = new Recursion();
+        double actual = sut.Factorial(N);
+
+        Assert.Equal(expected, actual);
+    }
 }
