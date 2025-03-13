@@ -2,7 +2,6 @@ Computer Science problems in .NET.
 
 ## Problem areas
 
-- Fast Fourier Transform
 - Sliding Window and Two Pointer
 - Greedy (Mostly Sorting)
 - Binary Search on Answer
