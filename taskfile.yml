@@ -4,13 +4,15 @@ tasks:
   build:
     cmds:
       - dotnet build Dojo.Net.sln -c Debug
-
-  build-release:
+  release:
     cmds:
       - dotnet build Dojo.Net.sln -c Release
-  run-release:
+  run:
     cmds:
-      - dotnet run Dojo.Net.sln --project Dojo.Net/Dojo.Net.csproj -c Release
+      - cd Dojo.Net/bin/Debug && dotnet Dojo.Net.dll
+  bench:
+    cmds:
+      - cd Dojo.Net/bin/Release && dotnet Dojo.Net.dll
   test:
     cmds:
-      - dotnet test
+      - dotnet test Dojo.Net.sln

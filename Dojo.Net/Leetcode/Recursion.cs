@@ -64,4 +64,18 @@ public class Recursion
         if (n == 1) return 1;
         return n * Factorial(n - 1);
     }
+
+    public int[] ReverseArray(int[] arr)
+    {
+        Swap(arr, 0, arr.Length - 1);
+        return arr;
+    }
+
+    private void Swap(int[] arr, int l, int r)
+    {
+        if (l >= r) return;
+        (arr[l], arr[r]) = (arr[r], arr[l]);
+        Swap(arr, l + 1, r - 1);
+        
+    }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using Dojo.Net.Leetcode;
 using JetBrains.Annotations;
 using Xunit;
@@ -7,16 +8,9 @@ using Xunit.Abstractions;
 namespace Dojo.Net.Tests.Leetcode;
 
 [TestSubject(typeof(Recursion))]
-public class RecursionTests
+public class RecursionTests(ITestOutputHelper logger)
 {
-    private readonly ITestOutputHelper _logger;
-
-    public RecursionTests(ITestOutputHelper logger)
-    {
-        _logger = logger;
-        var converter = new ConsoleConverter(logger);
-        Console.SetOut(converter);
-    }
+    private readonly ITestOutputHelper _logger = logger;
 
     [Theory]
     [InlineData("Ramesh", 6)]
@@ -133,8 +127,18 @@ public class RecursionTests
     public void Factorial(int N, double expected)
     {
         var sut = new Recursion();
-        double actual = sut.Factorial(N);
+        double actual = sut.Factorial(N);   
 
         Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] {5, 10, 15}, new  int[] {15, 10, 5})]
+    public void ReverseArray(int[] input, int[] expected)
+    {
+        Recursion sut = new();
+        int[] actual = sut.ReverseArray(input);
+
+        Assert.Equivalent(expected, actual);
     }
 }
