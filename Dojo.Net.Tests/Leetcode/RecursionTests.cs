@@ -1,7 +1,7 @@
-using System;
-using System.IO;
 using Dojo.Net.Leetcode;
+
 using JetBrains.Annotations;
+
 using Xunit;
 using Xunit.Abstractions;
 
@@ -134,11 +134,81 @@ public class RecursionTests(ITestOutputHelper logger)
 
     [Theory]
     [InlineData(new int[] {5, 10, 15}, new  int[] {15, 10, 5})]
+    [InlineData(new int[] {1, 2, 3, 4, 5}, new int[] {5, 4, 3, 2, 1})]
+    [InlineData(new int[] {7, 8, 9}, new int[] {9, 8, 7})]
+    [InlineData(new int[] {0, -1, -2}, new int[] {-2, -1, 0})]
+    [InlineData(new int[] {100}, new int[] {100})]
     public void ReverseArray(int[] input, int[] expected)
     {
         Recursion sut = new();
         int[] actual = sut.ReverseArray(input);
 
         Assert.Equivalent(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] {5, 10, 15}, new  int[] {15, 10, 5})]
+    [InlineData(new int[] {1, 2, 3, 4, 5}, new int[] {5, 4, 3, 2, 1})]
+    [InlineData(new int[] {7, 8, 9}, new int[] {9, 8, 7})]
+    [InlineData(new int[] {0, -1, -2}, new int[] {-2, -1, 0})]
+    [InlineData(new int[] {100}, new int[] {100})]
+    public void ReverseArrayWithSingleIndex(int[] input, int[] expected)
+    {
+        Recursion sut = new();
+        int[] actual = sut.ReverseArrayWithSingleIndex(input);
+
+        Assert.Equivalent(expected, actual);
+    }
+
+    [Theory]
+    [InlineData("madam", true)]
+    [InlineData("racecar", true)]
+    [InlineData("hello", false)]
+    [InlineData("level", true)]
+    [InlineData("world", false)]
+    public void IsPalindrome(string input, bool expected)
+    {
+        Recursion sut = new();
+        bool actual = sut.IsPalindrome(input);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData("madam", true)]
+    [InlineData("racecar", true)]
+    [InlineData("hello", false)]
+    [InlineData("level", true)]
+    [InlineData("world", false)]
+    public void IsPalindromeChecks(string input, bool expected)
+    {
+        Recursion sut = new();
+        bool actual = sut.IsPalindromeChecks(input);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData("A man, a plan, a canal: Panama", true)]
+    [InlineData("race a car", false)]
+    [InlineData("", true)]
+    public void IsPalindromeWithSanitization(string input, bool expected)
+    {
+        Recursion sut = new();
+        bool actual = sut.IsPalindromeWithSanitization(input);
+
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(10, 55)]
+    [InlineData(16, 987)]
+    [InlineData(19, 4181)]
+    public void FibonacciRecursive(int input, int expected)
+    {
+        Recursion sut = new();
+        int actual = sut.FibonacciRecursive(input);
+
+        Assert.Equal(expected, actual);
     }
 }

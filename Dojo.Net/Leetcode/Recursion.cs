@@ -1,8 +1,9 @@
 using System;
+using System.Text.RegularExpressions;
 
 namespace Dojo.Net.Leetcode;
 
-public class Recursion
+public partial class Recursion
 {
     public void PrintStringNTimes(string name, int iterations, int count)
     {
@@ -76,6 +77,60 @@ public class Recursion
         if (l >= r) return;
         (arr[l], arr[r]) = (arr[r], arr[l]);
         Swap(arr, l + 1, r - 1);
-        
+    }
+
+    public int[] ReverseArrayWithSingleIndex(int[] arr)
+    {
+        Reverse(arr, 0);
+        return arr;
+    }
+
+    public void Reverse(int[] arr, int i)
+    {
+        if (i >= arr.Length / 2) return;
+        (arr[i], arr[arr.Length - 1 - i]) = (arr[arr.Length - 1 - i], arr[i]);
+        Reverse(arr, i + 1);
+    }
+
+    public bool IsPalindrome(string inputString)
+    {
+        char[] str = inputString.ToCharArray();
+        ReverseString(str, 0);
+        string? outputString = string.Join(null, str);
+        if (outputString is not null) return outputString.Equals(inputString, StringComparison.OrdinalIgnoreCase);
+        else return false;
+    }
+
+    public void ReverseString(char[] str, int i)
+    {
+        if (i >= str.Length / 2) return;
+        (str[i], str[str.Length - 1 - i]) = (str[str.Length - 1 - i], str[i]);
+        ReverseString(str, i + 1);
+    }
+
+    public bool IsPalindromeChecks(string inputString) => ReverseStringCheck(inputString.ToCharArray(), 0);
+
+    public bool ReverseStringCheck(char[] str, int i)
+    {
+        if (i >= str.Length / 2) return true;
+        if (str[i] != str[str.Length - 1 - i]) return false;
+        return ReverseStringCheck(str, i + 1);
+    }
+
+    public bool IsPalindromeWithSanitization(string s) 
+    {
+        Regex alphanumericFilter = AlphanumericFilter();
+        string ip = alphanumericFilter.Replace(s, "").ToLower();
+        return ReverseStringCheck(ip.ToCharArray(), 0);
+    }
+
+    [GeneratedRegex("[^a-zA-Z0-9]")]
+    private static partial Regex AlphanumericFilter();
+
+    public int FibonacciRecursive(int N)
+    {
+        if (N == 0) return 0;
+        if (N == 1) return 1;
+        return FibonacciRecursive(N - 1) + FibonacciRecursive(N - 2);
     }
 }
