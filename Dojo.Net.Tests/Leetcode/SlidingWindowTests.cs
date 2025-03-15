@@ -20,14 +20,27 @@ public class SlidingWindowTests(ITestOutputHelper logger)
     public void MaxFrequency(int[] nums, int k, int expected)
     {
         var sut = new SlidingWindow();
-        try 
+        try
         {
             int actual = sut.MaxFrequency(nums, k);
-        } catch(NotImplementedException)
+        }
+        catch (NotImplementedException)
         {
 
         }
         _logger.WriteLine($"Expected: {expected}");
         // Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3, 1 }, 3, true)]
+    [InlineData(new int[] { 1, 0, 1, 1 }, 1, true)]
+    [InlineData(new int[] { 1, 2, 3, 1, 2, 3 }, 2, false)]
+    public void ContainsNearbyDuplicate(int[] nums, int k, bool expected)
+    {
+        var sut = new SlidingWindow();
+        bool actual = sut.ContainsNearbyDuplicate(nums, k);
+        _logger.WriteLine($"Expected: {expected}");
+        Assert.Equal(expected, actual);
     }
 }
