@@ -1,6 +1,7 @@
-using System;
 using Dojo.Net.Leetcode;
+
 using JetBrains.Annotations;
+
 using Xunit;
 using Xunit.Abstractions;
 
@@ -23,6 +24,17 @@ public class EasyProblemsTests(ITestOutputHelper logger)
     public void RomanToInt(string input, int expected)
     {
         int actual = sut.RomanToInt(input);
-        Assert.Equivalent(expected, actual);
+        Assert.Equal(expected, actual);
+    }
+
+
+    [Theory]
+    [InlineData(new string[] {"flower","flow","flight"}, "fl")]
+    [InlineData(new string[] {"dog","racecar","car"}, "")]
+    public void LongestCommonPrefix(string[] input, string expected)
+    {
+        string actual = sut.LongestCommonPrefix(input);
+        _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
+        Assert.Equal(expected, actual);
     }
 }

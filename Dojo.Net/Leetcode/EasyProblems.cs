@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Dojo.Net.Leetcode;
 
@@ -18,6 +19,17 @@ public class EasyProblemsBenchmark
             {
                 int actual = easyProblems.RomanToInt(romanNumerals[i]);
             }
+        }
+    }
+
+    public static void LongestCommonPrefix()
+    {
+        string[] strs = ["flower","flow","flight"];
+        EasyProblems easyProblems = new();
+
+        for (int j = 0; j < ITERATIONS; j++)
+        {
+            string actual = easyProblems.LongestCommonPrefix(strs);
         }
     }
 }
@@ -103,5 +115,20 @@ public class EasyProblems
         }
 
         return sum;
+    }
+
+
+    public string LongestCommonPrefix(string[] strs) 
+    {
+        Array.Sort(strs);
+        string first = strs[0];
+        string last = strs[^1];
+
+        int minLength = Math.Min(first.Length, last.Length);
+
+        int idx = 0;
+        while(idx < minLength && first[idx] == last[idx]) idx++;
+
+        return first[..idx];
     }
 }
