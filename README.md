@@ -1,11 +1,17 @@
 Computer Science problems in .NET.
 
+## Important and Useful Libraries
+
+ - jtmueller/Collections.Pooled: https://github.com/jtmueller/Collections.Pooled - Fast, low-allocation ports of List, Dictionary, HashSet, Stack, and Queue using ArrayPool and Span.
+ - jtmueller/RustyOptions: https://github.com/jtmueller/RustyOptions - Option and Result types for C#, inspired by Rust.
+ - ardalis/SmartEnum: https://github.com/ardalis/SmartEnum - A base class for quickly and easily creating strongly typed enum replacements in C#.
+
 ## Problem areas
 
 - Sliding Window and Two Pointer
 - Greedy (Mostly Sorting)
 - Binary Search on Answer
-- All Combinations/Permutations/Ways
+- All Combinations/Permutations/Ways`
 - K Smallest / K Largest → Heaps
 - Prefix/Suffix/Word Search → Tries
 - Graph - DFS / BFS

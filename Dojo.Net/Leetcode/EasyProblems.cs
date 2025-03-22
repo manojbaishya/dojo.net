@@ -1,29 +1,61 @@
+using System;
 using System.Collections.Generic;
 
 namespace Dojo.Net.Leetcode;
 
+public class EasyProblemsBenchmark
+{
+    private const int ITERATIONS = 50;
+
+    public static void RomanToInt()
+    {
+        string[] romanNumerals = ["III", "LVIII", "MCMXCIV", "MMMCMXCIX", "MMMCXCIX", "XLIX", "CMXCIX"];
+        EasyProblems easyProblems = new();
+
+        for (int j = 0; j < ITERATIONS; j++)
+        {
+            for (int i = 0; i < romanNumerals.Length; i++)
+            {
+                int actual = easyProblems.RomanToInt(romanNumerals[i]);
+            }
+        }
+    }
+}
+
 public class EasyProblems
 {
+    private int GetRomanValue(char key) => key switch
+    {
+        'I' => 1,
+        'V' => 5,
+        'X' => 10,
+        'L' => 50,
+        'C' => 100,
+        'D' => 500,
+        'M' => 1000,
+        _ => 0
+    };
+    
+    private bool IsSubtractRuleApply(char key, char value)
+    {
+        switch(key)
+        {
+            case 'I':
+                if (value == 'V' || value == 'X') return true;
+                else return false;
+            case 'X':
+                if (value == 'L' || value == 'C') return true;
+                else return false;
+            case 'C':
+                if (value == 'D' || value == 'M') return true;
+                else return false;
+            default:
+                return false;
+        }
+    }
+
     public int RomanToInt(string s)
     {
-        Dictionary<char, int> numbers = new()
-        {
-            ['I'] = 1,
-            ['V'] = 5,
-            ['X'] = 10,
-            ['L'] = 50,
-            ['C'] = 100,
-            ['D'] = 500,
-            ['M'] = 1000
-        };
-
-        Dictionary<char, HashSet<char>> subtract = new()
-        {
-            ['I'] = ['V', 'X'],
-            ['X'] = ['L', 'C'],
-            ['C'] = ['D', 'M']
-        };
-
         Queue<char> chars = new(s.ToCharArray());
 
         int sum = 0;
@@ -31,25 +63,21 @@ public class EasyProblems
         {
             char curr = chars.Dequeue();
             if (chars.Count == 0)
-            { 
-                sum += numbers[curr]; 
+            {
+                sum += GetRomanValue(curr);
                 break;
             }
 
             char next = chars.Peek();
 
-            if (next != curr && subtract.TryGetValue(curr, out HashSet<char>? value) && value.Contains(next))
+            if (next != curr && IsSubtractRuleApply(curr, next))
             {
                 next = chars.Dequeue();
-                sum += numbers[next] - numbers[curr];
+                sum += GetRomanValue(next) - GetRomanValue(curr);
             }
-            else if (next != curr && subtract.TryGetValue(curr, out value) && !value.Contains(next))
+            else if (next != curr && !IsSubtractRuleApply(curr, next))
             {
-                sum += numbers[curr];
-            }
-            else if (next != curr && !subtract.TryGetValue(curr, out _))
-            {
-                sum += numbers[curr];
+                sum += GetRomanValue(curr);
             }
             else if (next == curr)
             {
@@ -57,23 +85,22 @@ public class EasyProblems
 
                 if (chars.Count == 0)
                 {
-                    sum += numbers[curr] * 2;
+                    sum += GetRomanValue(curr) * 2;
                     break;
                 }
 
                 char third = chars.Peek();
                 if (third != next)
                 {
-                    sum += numbers[curr] * 2;
+                    sum += GetRomanValue(curr) * 2;
                 }
                 else if (third == next)
                 {
                     third = chars.Dequeue();
-                    sum += numbers[curr] * 3;
+                    sum += GetRomanValue(curr) * 3;
                 }
             }
         }
-
 
         return sum;
     }
