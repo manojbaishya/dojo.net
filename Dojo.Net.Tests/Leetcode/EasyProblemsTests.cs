@@ -7,7 +7,7 @@ using Xunit.Abstractions;
 
 namespace Dojo.Net.Tests.Leetcode;
 
-[TestSubject(typeof(EasyProblemsTests))]
+[TestSubject(typeof(EasyProblems))]
 public class EasyProblemsTests(ITestOutputHelper logger)
 {
     private readonly ITestOutputHelper _logger = logger;
