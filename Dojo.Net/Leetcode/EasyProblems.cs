@@ -24,7 +24,7 @@ public class EasyProblemsBenchmark
 
     public static void LongestCommonPrefix()
     {
-        string[] strs = ["flower","flow","flight"];
+        string[] strs = ["flower", "flow", "flight"];
         EasyProblems easyProblems = new();
 
         for (int j = 0; j < ITERATIONS; j++)
@@ -47,10 +47,10 @@ public class EasyProblems
         'M' => 1000,
         _ => 0
     };
-    
+
     private bool IsSubtractRuleApply(char key, char value)
     {
-        switch(key)
+        switch (key)
         {
             case 'I':
                 if (value == 'V' || value == 'X') return true;
@@ -118,7 +118,7 @@ public class EasyProblems
     }
 
 
-    public string LongestCommonPrefix(string[] strs) 
+    public string LongestCommonPrefix(string[] strs)
     {
         Array.Sort(strs);
         string first = strs[0];
@@ -127,8 +127,62 @@ public class EasyProblems
         int minLength = Math.Min(first.Length, last.Length);
 
         int idx = 0;
-        while(idx < minLength && first[idx] == last[idx]) idx++;
+        while (idx < minLength && first[idx] == last[idx]) idx++;
 
         return first[..idx];
+    }
+
+    public int RemoveDuplicates(int[] nums)
+    {
+        int j = 0;
+        List<int> indices = [0];
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[j] != nums[i])
+            {
+                indices.Add(i);
+                j = i;
+            }
+        }
+
+        for (int k = 0; k < indices.Count; k++)
+        {
+            nums[k] = nums[indices[k]];
+        }
+
+        return indices.Count;
+    }
+
+    public void MergeSortedArrays(int[] nums1, int m, int[] nums2, int n)
+    {
+        int k = m + n - 1;
+        int i = m - 1;
+        int j = n - 1;
+
+        while(i >= 0 && j >= 0)
+        {
+            if (nums1[i] > nums2[j])
+            {
+                nums1[k] = nums1[i];
+                k--;
+                i--;
+            }
+            else
+            {
+                nums1[k] = nums2[j];
+                k--;
+                j--;
+            }
+        }
+
+        if (i < 0 && j >= 0)
+        {
+            while (j >= 0)
+            {
+                nums1[k] = nums2[j];
+                k--;
+                j--;
+            }
+        }
     }
 }
