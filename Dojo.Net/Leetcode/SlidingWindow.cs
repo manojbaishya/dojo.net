@@ -39,38 +39,77 @@ public class SlidingWindow
         return false;
     }
 
-    public string MinWindow(string s, string t) 
+    public string MinWindow(string s, string t)
     {
-        // Validation Checks
-        if (!new HashSet<char>(s).IsSupersetOf(new HashSet<char>(t))) return string.Empty;
+        if (s.Length < t.Length) return "";
         if (s.Equals(t)) return s;
 
-        PriorityQueue<Tuple<int, int>, int> minlengthIndices = new();
-        Dictionary<char, int> window = [];
-        int minLength = int.MaxValue;
+        Dictionary<char, int> cmpFreq = GetCharCounts(t.ToCharArray());
 
-        int start = 0;
-        for (int end = 0; end < s.Length; end++)
+        Dictionary<char, int> testFreq;
+        if (s.Length == t.Length)
         {
-            if(!window.TryAdd(s[end], 1)) window[s[end]] += 1;
-
-            HashSet<char> keySet = [.. window.Keys];
-
-            while (keySet.IsSupersetOf(t))
-            {
-                minLength = Math.Min(minLength, end + 1 - start);
-                if (window[s[start]] > 1) window[s[start]]--;
-                else window.Remove(s[start]);
-                keySet = [.. window.Keys];
-                start++;
-            }
-
-            minlengthIndices.Enqueue(new Tuple<int, int>(start - 1, end), minLength);
+            testFreq = GetCharCounts(s.ToCharArray());
+            return CheckIfAllCharsExist(cmpFreq, testFreq) ? s : "";
         }
 
-        Tuple<int, int> substringMatch = minlengthIndices.Dequeue();
+        PriorityQueue<Tuple<int, int>, int> minLengthsToWindows = new();
+        int st = 0;
+        Span<char> master = s.ToCharArray().AsSpan();
+        for (int en = 0; en < master.Length; en++)
+        {
+            if (en + 1 - st < t.Length) continue;
 
-        string substring = s[substringMatch.Item1..(substringMatch.Item2 + 1)];
-        return substring.Length >= t.Length ? substring : string.Empty;
+            ReadOnlySpan<char> window = master[st..(en + 1)];
+            // FIXME: Do not generate a new Dictionary for each substring window.
+            // TODO: Instead, have a master dictionary and update the counts as the iteration proceeds.
+            // TODO: Merge with L#52
+            testFreq = GetCharCounts(window);
+            
+            
+            if (!CheckIfAllCharsExist(cmpFreq, testFreq)) continue;
+
+            while (en + 1 - st >= t.Length)
+            {
+                char yanked = s[st];
+                if (testFreq[yanked] > 1) testFreq[yanked]--;
+                else testFreq.Remove(yanked);
+
+                st++;
+                if (cmpFreq.TryGetValue(yanked, out int value) && (!testFreq.ContainsKey(yanked) || testFreq[yanked] < value)) break;
+            }
+
+            minLengthsToWindows.Enqueue(new Tuple<int, int>(st - 1, en + 1), en + 1 - (st - 1));
+        }
+
+        if (minLengthsToWindows.Count == 0) return string.Empty;
+
+        Tuple<int, int> idxs = minLengthsToWindows.Dequeue();
+        return s[idxs.Item1..idxs.Item2];
+    }
+
+    public static Dictionary<char, int> GetCharCounts(ReadOnlySpan<char> input)
+    {
+        Dictionary<char, int> charCounts = new(input.Length);
+
+        foreach (char c in input)
+        {
+            if (charCounts.TryGetValue(c, out int _)) charCounts[c]++;
+            else charCounts[c] = 1;
+        }
+
+        return charCounts;
+    }
+
+    private static bool CheckIfAllCharsExist(Dictionary<char, int> cmpFreq, Dictionary<char, int> testFreq)
+    {
+        foreach (var kvp in cmpFreq)
+        {
+            if (!testFreq.TryGetValue(kvp.Key, out int count) || count < kvp.Value)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

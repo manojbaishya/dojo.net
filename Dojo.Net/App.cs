@@ -8,6 +8,6 @@ public class App
     {
         // Benchmarks.Run();
         // EasyProblemsBenchmark.RomanToInt();
-        EasyProblemsBenchmark.LongestCommonPrefix();
+        EasyProblemsBenchmark.LongestCommonPrefix(); // Profiled in dotTrace
     }
 }
