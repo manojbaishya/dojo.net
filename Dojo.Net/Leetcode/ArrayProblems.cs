@@ -123,4 +123,25 @@ public class ArrayProblems
         if ((b < a) ^ (b < c)) return mid;
         return right;
     }
+
+    public int Largest(List<int> arr)
+    {
+        int max = int.MinValue;
+        for (int i = 0; i < arr.Count; i++) if (arr[i] >= max) max = arr[i];
+        return max;
+    }
+
+    public int GetSecondLargest(int[] arr)
+    {
+        int max = int.MinValue;
+        int midx = -1;
+        for (int i = 0; i < arr.Length; i++) if (arr[i] >= max) (midx, max) = (i, arr[i]);
+        
+        (arr[0], arr[midx]) =  (arr[midx], arr[0]);
+
+        int secMax = int.MinValue;
+        for (int i = 1; i < arr.Length; i++) if (arr[i] != max && arr[i] >= secMax) (_, secMax) = (i, arr[i]);
+
+        return secMax != int.MinValue ? secMax : -1;
+    }
 }
