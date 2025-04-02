@@ -11,7 +11,7 @@ public class ArrayProblems
     /// <param name="target"></param>
     /// <param name="nums"></param>
     /// <returns></returns>
-    public int MinSubArrayLen(int target, int[] nums) 
+    public int MinSubArrayLen(int target, int[] nums)
     {
         int minLength = int.MaxValue;
 
@@ -22,7 +22,7 @@ public class ArrayProblems
         {
             windowSum += nums[end];
 
-            while(windowSum >= target)
+            while (windowSum >= target)
             {
                 windowSum -= nums[start];
                 minLength = Math.Min(minLength, end + 1 - start);
@@ -49,7 +49,7 @@ public class ArrayProblems
 
         List<int> tmp = new(right + 1 - left);
 
-        while(l <= mid && r <= right)
+        while (l <= mid && r <= right)
         {
             if (arr[l] <= arr[r])
             {
@@ -63,13 +63,13 @@ public class ArrayProblems
             }
         }
 
-        while(l <= mid)
+        while (l <= mid)
         {
             tmp.Add(arr[l]);
             l++;
         }
 
-        while(r <= right)
+        while (r <= right)
         {
             tmp.Add(arr[r]);
             r++;
@@ -77,7 +77,7 @@ public class ArrayProblems
 
         for (int i = left; i <= right; i++)
         {
-            arr[i] = tmp[i - left];   
+            arr[i] = tmp[i - left];
         }
     }
 
@@ -95,37 +95,32 @@ public class ArrayProblems
 
     private static int PartitionByPivot(int[] arr, int left, int right)
     {
-        int pivot = MedianOfThree(arr, left, right);
+        // int pivot = MedianOfThree(arr, left, right);
+        int pivot = left;
 
-        (arr[pivot], arr[left]) = (arr[left], arr[pivot]); 
-        pivot = left;
-
-        (int i, int j) = (left + 1, right);
-
-        while(i < j)
+        (int i, int j) = (left, right);
+        while (i < j)
         {
-            while(arr[i] <= arr[pivot] && i < j) i++;
-            while(arr[j] > arr[pivot] && j > i) j--;
+            while (i < right && arr[i] <= arr[pivot]) i++;
+            while (j > left && arr[j] > arr[pivot]) j--;
 
             if (i < j) (arr[j], arr[i]) = (arr[i], arr[j]);
         }
 
-        (arr[pivot], arr[i - 1]) = (arr[i - 1], arr[pivot]); 
-        pivot = i - 1;
+        (arr[left], arr[j]) = (arr[j], arr[left]);
 
-        return pivot;
-        
+        return j;
     }
 
     private static int MedianOfThree(int[] arr, int left, int right)
     {
-        if(right - left == 1) return arr[left] <= arr[right] ? left : right;
-        
+        if (right - left == 1) return arr[left] <= arr[right] ? left : right;
+
         int mid = left + (right - left) / 2;
-        (int a, int b, int c) = (arr[left], arr[mid], arr[right]);
-        
-        if ((a <= b && b <= c) || (a >= b && b >= c)) return mid;
-        if ((a <= c && c <= b) || (a >= c && c >= b)) return right;
-        return left;
+        int a = arr[left], b = arr[mid], c = arr[right];
+
+        if ((a > b) ^ (a > c)) return left;
+        if ((b < a) ^ (b < c)) return mid;
+        return right;
     }
 }
