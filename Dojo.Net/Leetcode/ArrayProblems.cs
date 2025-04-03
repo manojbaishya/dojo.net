@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Dojo.Net.Leetcode;
 
@@ -95,21 +96,28 @@ public class ArrayProblems
 
     private static int PartitionByPivot(int[] arr, int left, int right)
     {
-        // int pivot = MedianOfThree(arr, left, right);
-        int pivot = left;
+        int pivot = MedianOfThree(arr, left, right);
+        // int pivot = left;
+
+        (arr[left], arr[pivot]) = (arr[pivot], arr[left]);
+        pivot = left;
 
         (int i, int j) = (left, right);
         while (i < j)
         {
-            while (i < right && arr[i] <= arr[pivot]) i++;
-            while (j > left && arr[j] > arr[pivot]) j--;
+            while (arr[i] <= arr[pivot] && i < right) i++;
+            while (arr[j] > arr[pivot] && j > left) j--;
 
             if (i < j) (arr[j], arr[i]) = (arr[i], arr[j]);
         }
 
-        (arr[left], arr[j]) = (arr[j], arr[left]);
+        if (arr[pivot] >= arr[j])
+        {
+            (arr[left], arr[j]) = (arr[j], arr[left]);
+            pivot = j;
+        }
 
-        return j;
+        return pivot;
     }
 
     private static int MedianOfThree(int[] arr, int left, int right)
@@ -136,12 +144,218 @@ public class ArrayProblems
         int max = int.MinValue;
         int midx = -1;
         for (int i = 0; i < arr.Length; i++) if (arr[i] >= max) (midx, max) = (i, arr[i]);
-        
-        (arr[0], arr[midx]) =  (arr[midx], arr[0]);
+
+        (arr[0], arr[midx]) = (arr[midx], arr[0]);
 
         int secMax = int.MinValue;
         for (int i = 1; i < arr.Length; i++) if (arr[i] != max && arr[i] >= secMax) (_, secMax) = (i, arr[i]);
 
         return secMax != int.MinValue ? secMax : -1;
+    }
+
+    public bool CheckSortAndRotation(int[] nums)
+    {
+        int troughs = 0;
+        for (int i = 0; i < nums.Length - 1; i++)
+        {
+            if (nums[i + 1] >= nums[i]) continue;
+            else troughs++;
+            if (troughs > 1) break;
+        }
+
+        if (troughs == 0) return true;
+        if (troughs == 1 && nums[^1] <= nums[0]) return true;
+        return false;
+    }
+
+    public int RemoveDuplicates(int[] nums)
+    {
+        int j = 0;
+        List<int> indices = new(nums.Length) { 0 };
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[j] != nums[i])
+            {
+                indices.Add(i);
+                j = i;
+            }
+        }
+
+        for (int k = 0; k < indices.Count; k++)
+        {
+            nums[k] = nums[indices[k]];
+        }
+
+        return indices.Count;
+    }
+
+    public int RemoveDuplicates2(int[] nums)
+    {
+        int i = 0, j = 0;
+        while (i < nums.Length)
+        {
+            if (nums[i] != nums[j])
+            {
+                j++;
+                nums[j] = nums[i];
+            }
+            i++;
+        }
+
+        return j + 1;
+    }
+
+    public void Rotate(int[] nums, int k)
+    {
+        int m = k;
+        if (k >= nums.Length) m = k % nums.Length;
+        int[] tmp = new int[m];
+        int N = nums.Length;
+        for (int i = N - m; i < N; i++)
+        {
+            tmp[i - (N - m)] = nums[i];
+        }
+
+        for (int i = N - m - 1; i >= 0; i--)
+        {
+            nums[i + m] = nums[i];
+        }
+
+        for (int i = 0; i < m; i++)
+        {
+            nums[i] = tmp[i];
+        }
+    }
+
+    public void Rotate2(int[] nums, int k)
+    {
+        int N = nums.Length;
+        int m = k;
+        if (k >= N) m = k % N;
+
+        Reverse(nums, 0, N - 1);
+        Reverse(nums, 0, m - 1);
+        Reverse(nums, m, N - 1);
+    }
+
+    private void Reverse(int[] nums, int l, int r)
+    {
+        while (l < r)
+        {
+            (nums[l], nums[r]) = (nums[r], nums[l]);
+            l++;
+            r--;
+        }
+    }
+
+
+    public void MoveZeroes(int[] nums)
+    {
+        int i = 0, j = 0;
+        while (i < nums.Length)
+        {
+            if (nums[i] != 0)
+            {
+                nums[j] = nums[i];
+                j++;
+            }
+            i++;
+        }
+
+        for (int k = j; k < nums.Length; k++)
+        {
+            nums[k] = 0;
+        }
+    }
+
+    public bool LinearSearch(int[] arr, int k)
+    {
+        for (int i = 0; i < arr.Length; i++) if (arr[i] == k) return true;
+        return false;
+    }
+
+    public int[] FindUnion(int[] a, int[] b) => [.. new HashSet<int>([.. a, .. b]).Order()];
+
+    public int MissingNumber(int[] nums)
+    {
+        int N = nums.Length;
+        int cmpSum = N * (N + 1) / 2;
+        int actualSum = 0;
+        for (int i = 0; i < nums.Length; i++) actualSum += nums[i];
+        return cmpSum - actualSum;
+    }
+
+    public int FindMaxConsecutiveOnes(int[] nums)
+    {
+        int S = 0;
+        int L = 0;
+        for (int end = 0; end < nums.Length; end++)
+        {
+            if (nums[end] == 1) L++;
+            else L = 0;
+            if (L != 0) S = Math.Max(S, L);
+        }
+
+        return S;
+    }
+
+    public int SingleNumber(int[] nums)
+    {
+        int res = nums[0];
+
+        for (int i = 1; i < nums.Length; i++)
+        {
+            res ^= nums[i];
+        }
+
+        return res;
+    }
+
+    public int LongestSubarraySum(int[] arr, int k)
+    {
+        int maxLength = int.MinValue;
+        int sum = 0;
+
+        int start = 0;
+        for (int end = 0; end < arr.Length; end++)
+        {
+            sum += arr[end];
+
+            while (sum == k)
+            {
+                maxLength = Math.Max(maxLength, end + 1 - start);
+                sum -= arr[start];
+                start++;
+            }
+        }
+
+        return maxLength != int.MinValue ? maxLength : 0;
+    }
+
+    public int LongestSubarraySumPrefix(int[] arr, int k)
+    {
+        int[] sums = new int[arr.Length + 1];
+
+        for (int i = 0; i < arr.Length; i++)
+            sums[i + 1] = sums[i] + arr[i];
+
+        Dictionary<int, int> prefixSumMap = new Dictionary<int, int>();
+        int maxLength = 0;
+
+        for (int j = 0; j < arr.Length; j++)
+        {
+            int currentSum = sums[j + 1];
+
+            if (currentSum == k)
+                maxLength = Math.Max(maxLength, j + 1);
+
+            if (prefixSumMap.ContainsKey(currentSum - k))
+                maxLength = Math.Max(maxLength, j - prefixSumMap[currentSum - k]);
+
+            if (!prefixSumMap.ContainsKey(currentSum))
+                prefixSumMap[currentSum] = j;
+        }
+
+        return maxLength;
     }
 }

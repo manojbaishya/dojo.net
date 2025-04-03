@@ -39,6 +39,7 @@ public class ArrayProblemsTests(ITestOutputHelper logger)
     }
 
     [Theory]
+    [InlineData(new int[8] { 4, 6, 2, 5, 7, 9, 1, 3 }, new int[8] { 1, 2, 3, 4, 5, 6, 7, 9 })]
     [InlineData(new int[10] { 544, 484, 246, 354, 872, 767, 164, 134, 293, 879 }, new int[10] { 134, 164, 246, 293, 354, 484, 544, 767, 872, 879 })]
     [InlineData(new int[12] { 328, 328, 328, 416, 411, 296, 296, 296, 484, 102, 102, 150 }, new int[12] { 102, 102, 150, 296, 296, 296, 328, 328, 328, 411, 416, 484 })]
     [InlineData(new int[10] { 101, 114, 330, 207, 220, 179, 188, 228, 415, 374 }, new int[10] { 101, 114, 179, 188, 207, 220, 228, 330, 374, 415 })]
@@ -64,6 +65,102 @@ public class ArrayProblemsTests(ITestOutputHelper logger)
     public void GetSecondLargest(int[] nums, int expected)
     {
         int actual = sut.GetSecondLargest(nums);
+        _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 3, 4, 5, 1, 2 }, true)]
+    [InlineData(new int[] { 2, 1, 3, 4 }, false)]
+    [InlineData(new int[] { 1, 2, 3 }, true)]
+    public void CheckSortAndRotation(int[] nums, bool expected)
+    {
+        bool actual = sut.CheckSortAndRotation(nums);
+        _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }, new int[] { 0, 1, 2, 3, 4, 2, 2, 3, 3, 4 }, 5)]
+    [InlineData(new int[] { 1, 1, 2 }, new int[] { 1, 2, 2 }, 2)]
+    public void RemoveDuplicates(int[] input, int[] expected, int expectedSize)
+    {
+        int actualSize = sut.RemoveDuplicates(input);
+        for (int i = 0; i < actualSize; i++)
+        {
+            Assert.Equal(input[i], expected[i]);
+            Assert.Equal(expectedSize, actualSize);
+            _logger.WriteLine($"Expected: {expected}, ActualSize: {actualSize}");
+        }
+    }
+
+    [Theory]
+    [InlineData(new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }, new int[] { 0, 1, 2, 3, 4, 2, 2, 3, 3, 4 }, 5)]
+    [InlineData(new int[] { 1, 1, 2 }, new int[] { 1, 2, 2 }, 2)]
+    public void RemoveDuplicates2(int[] input, int[] expected, int expectedSize)
+    {
+        int actualSize = sut.RemoveDuplicates2(input);
+        for (int i = 0; i < actualSize; i++)
+        {
+            Assert.Equal(input[i], expected[i]);
+            Assert.Equal(expectedSize, actualSize);
+            _logger.WriteLine($"Expected: {expected}, ActualSize: {actualSize}");
+        }
+    }
+
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, new int[] { 5, 6, 7, 1, 2, 3, 4 })]
+    [InlineData(new int[] { -1, -100, 3, 99 }, 2, new int[] { 3, 99, -1, -100 })]
+    public void Rotate(int[] input, int k, int[] expected)
+    {
+        sut.Rotate(input, k);
+        Assert.Equal(input, expected);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3, 4, 5, 6, 7 }, 3, new int[] { 5, 6, 7, 1, 2, 3, 4 })]
+    [InlineData(new int[] { -1, -100, 3, 99 }, 2, new int[] { 3, 99, -1, -100 })]
+    public void Rotate2(int[] input, int k, int[] expected)
+    {
+        sut.Rotate2(input, k);
+        Assert.Equal(input, expected);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 6, 7 }, new int[] { 1, 2, 3, 4, 5, 6, 7 })]
+    [InlineData(new int[] { 2, 2, 3, 4, 5 }, new int[] { 1, 1, 2, 3, 4 }, new int[] { 1, 2, 3, 4, 5 })]
+    [InlineData(new int[] { 1, 1, 1, 1, 1 }, new int[] { 2, 2, 2, 2, 2 }, new int[] { 1, 2 })]
+
+    public void FindUnion(int[] input1, int[] input2, int[] expected)
+    {
+        int[] actual = sut.FindUnion(input1, input2);
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 1, 1, 0, 1, 1, 1 }, 3)]
+    public void FindMaxConsecutiveOnes(int[] nums, int expected)
+    {
+        int actual = sut.FindMaxConsecutiveOnes(nums);
+        _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 10, 5, 2, 7, 1, -10 }, 15, 4)]
+    public void LongestSubarraySum(int[] nums, int k, int expected)
+    {
+        int actual = sut.LongestSubarraySum(nums, k);
+        _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 10, 5, 2, 7, 1, -10 }, 15, 6)]
+    public void LongestSubarraySumPrefix(int[] nums, int k, int expected)
+    {
+        int actual = sut.LongestSubarraySumPrefix(nums, k);
         _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
         Assert.Equal(expected, actual);
     }

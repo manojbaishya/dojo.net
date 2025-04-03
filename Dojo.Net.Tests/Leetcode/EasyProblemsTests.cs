@@ -38,18 +38,7 @@ public class EasyProblemsTests(ITestOutputHelper logger)
         Assert.Equal(expected, actual);
     }
 
-    [Theory]
-    [InlineData(new int[] { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 }, new int[] { 0, 1, 2, 3, 4, 2, 2, 3, 3, 4 })]
-    [InlineData(new int[] { 1, 1, 2 }, new int[] { 1, 2, 2 })]
-    public void RemoveDuplicates(int[] input, int[] expected)
-    {
-        int actualSize = sut.RemoveDuplicates(input);
-        for (int i = 0; i < actualSize; i++)
-        {
-            Assert.Equal(input[i], expected[i]);
-            _logger.WriteLine($"Expected: {expected}, ActualSize: {actualSize}");
-        }
-    }
+
 
     [Theory]
     [InlineData(new int[] { 1, 2, 3, 0, 0, 0 }, 3, new int[] { 2, 5, 6 }, 3, new int[] { 1, 2, 2, 3, 5, 6 })]

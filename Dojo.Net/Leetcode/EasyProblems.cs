@@ -132,27 +132,6 @@ public class EasyProblems
         return first[..idx];
     }
 
-    public int RemoveDuplicates(int[] nums)
-    {
-        int j = 0;
-        List<int> indices = [0];
-        for (int i = 0; i < nums.Length; i++)
-        {
-            if (nums[j] != nums[i])
-            {
-                indices.Add(i);
-                j = i;
-            }
-        }
-
-        for (int k = 0; k < indices.Count; k++)
-        {
-            nums[k] = nums[indices[k]];
-        }
-
-        return indices.Count;
-    }
-
     public void MergeSortedArrays(int[] nums1, int m, int[] nums2, int n)
     {
         int k = m + n - 1;
