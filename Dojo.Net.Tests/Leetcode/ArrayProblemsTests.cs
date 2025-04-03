@@ -1,5 +1,6 @@
+using System.IO;
 using Dojo.Net.Leetcode;
-
+using dotenv.net;
 using JetBrains.Annotations;
 
 using Xunit;
@@ -8,10 +9,21 @@ using Xunit.Abstractions;
 namespace Dojo.Net.Tests.Leetcode;
 
 [TestSubject(typeof(ArrayProblems))]
-public class ArrayProblemsTests(ITestOutputHelper logger)
+public class ArrayProblemsTests
 {
-    private readonly ITestOutputHelper _logger = logger;
+    private readonly ITestOutputHelper _logger;
     private readonly ArrayProblems sut = new();
+    private const string ENV_FILE = "test.env";
+
+    public ArrayProblemsTests(ITestOutputHelper logger)
+    {
+        _logger = logger;
+
+        if (File.Exists(ENV_FILE))
+        {
+            DotEnv.Load(options: new DotEnvOptions(envFilePaths: [ENV_FILE]));
+        }
+    }
 
     [Theory]
     [InlineData(7, new int[] { 2, 3, 1, 2, 4, 3 }, 2)]

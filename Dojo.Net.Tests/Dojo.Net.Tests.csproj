@@ -10,8 +10,6 @@
 
     <RunSettingsFilePath>xunit.runsettings</RunSettingsFilePath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
-
-
   </PropertyGroup>
 
   <ItemGroup>
@@ -33,6 +31,12 @@
 
   <ItemGroup>
     <ProjectReference Include="../Dojo.Net/Dojo.Net.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="*.env">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
