@@ -358,4 +358,86 @@ public class ArrayProblems
 
         return maxLength;
     }
+
+    public int[] TwoSum2(int[] nums, int target)
+    {
+        Dictionary<int, int> map = new(nums.Length);
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (map.ContainsKey(target - nums[i])) return [map[target - nums[i]], i];
+            map.TryAdd(nums[i], i);
+        }
+
+        return [-1, -1];
+    }
+
+    public void SortColors(int[] nums)
+    {
+        int red = 0, white = 0, blue = 0;
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            switch (nums[i])
+            {
+                case 0:
+                    red++;
+                    break;
+                case 1:
+                    white++;
+                    break;
+                case 2:
+                    blue++;
+                    break;
+                default:
+                    continue;
+            }
+        }
+
+        int j = 0;
+        while (j < red)
+        {
+            nums[j] = 0;
+            j++;
+        }
+        while (j < red + white)
+        {
+            nums[j] = 1;
+            j++;
+        }
+        while (j < red + white + blue)
+        {
+            nums[j] = 2;
+            j++;
+        }
+    }
+
+
+    public int MajorityElement(int[] nums) 
+    {
+        Dictionary<int, int> freq = new(nums.Length);
+        for (int i = 0; i < nums.Length; i++) if(!freq.TryAdd(nums[i], 1)) freq[nums[i]]++;
+        foreach (KeyValuePair<int, int> pair in freq) if(pair.Value > (nums.Length / 2)) return pair.Key;
+        return default;
+    }
+
+    public int MajorityElementMoore(int[] nums) 
+    {
+        int element = default, count = 0;
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (count == 0) element = nums[i];
+
+            if (nums[i] == element) count++; 
+            else count--;
+        }
+        
+        if (count == 0) return default;
+        
+        int freq = 0;
+        for (int i = 0; i < nums.Length; i++) if (nums[i] == element) freq++;    
+
+        if (freq > nums.Length / 2) return element;
+        else return default;
+    }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using Dojo.Net.Leetcode;
 using dotenv.net;
@@ -173,6 +174,42 @@ public class ArrayProblemsTests
     public void LongestSubarraySumPrefix(int[] nums, int k, int expected)
     {
         int actual = sut.LongestSubarraySumPrefix(nums, k);
+        _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new[] { 2, 7, 11, 15 }, 9, new[] { 0, 1 })]
+    [InlineData(new[] { 3, 2, 4 }, 6, new[] { 1, 2 })]
+    [InlineData(new[] { 3, 3 }, 6, new[] { 0, 1 })]
+    [InlineData(new[] { 3, 2, 3 }, 6, new[] { 0, 2 })]
+    [InlineData(new[] { 0, 4, 3, 0 }, 0, new[] { 0, 3 })]
+    [InlineData(new[] { -3, 4, 3, 90 }, 0, new[] { 0, 2 })]
+    [InlineData(new[] { -1, -2, -3, -4, -5 }, -8, new[] { 2, 4 })]
+    [InlineData(new[] { -10, -1, -18, -19 }, -19, new[] { 1, 2 })]
+    public void TwoSum2(int[] inputArray, int inputTarget, int[] expected)
+    {
+        int[] actual = sut.TwoSum2(inputArray, inputTarget);
+
+        _logger.WriteLine(string.Join(",", actual));
+
+        Assert.Equivalent(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 2, 2, 1, 1, 1, 2, 2 }, 2)]
+    public void MajorityElement(int[] nums, int expected)
+    {
+        int actual = sut.MajorityElement(nums);
+        _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 2, 2, 1, 1, 1, 2, 2 }, 2)]
+    public void MajorityElementMoore(int[] nums, int expected)
+    {
+        int actual = sut.MajorityElementMoore(nums);
         _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
         Assert.Equal(expected, actual);
     }
