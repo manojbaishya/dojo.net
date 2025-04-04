@@ -411,6 +411,30 @@ public class ArrayProblems
         }
     }
 
+    public void SortColorsDutchNationalFlag(int[] nums)
+    {
+        int left = 0, mid = 0, right = nums.Length - 1;
+
+        while(mid <= right)
+        {
+            if (nums[mid] == 0)
+            {
+                (nums[left], nums[mid]) = (nums[mid], nums[left]);
+                left++;
+                mid++;
+            }
+            else if (nums[mid] == 1)
+            {
+                mid++;
+            }
+            else
+            {
+                (nums[right], nums[mid]) = (nums[mid], nums[right]);
+                right--;
+            }
+        }
+    }
+
 
     public int MajorityElement(int[] nums) 
     {
@@ -439,5 +463,27 @@ public class ArrayProblems
 
         if (freq > nums.Length / 2) return element;
         else return default;
+    }
+
+    public int MaxSubArraySumKadane(int[] nums) 
+    {
+        int sum = 0, maxSum = int.MinValue;
+        int start = -1, subStart = -1, subEnd = -1;
+
+        for (int i = 0; i < nums.Length; i++)
+        {
+            sum += nums[i];
+
+            if (sum > maxSum)
+            {
+                maxSum = sum;
+                subStart = start;
+                subEnd = i;
+            }
+
+            if (sum < 0) sum = 0;
+        }
+        
+        return maxSum != int.MinValue ? maxSum : 0;
     }
 }
