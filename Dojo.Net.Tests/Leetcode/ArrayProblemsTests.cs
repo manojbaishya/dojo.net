@@ -213,4 +213,25 @@ public class ArrayProblemsTests
         _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
         Assert.Equal(expected, actual);
     }
+
+    [Theory]
+    [InlineData(new int[] { 3, 1, -2, -5, 2, -4 }, new int[] { 3, -2, 1, -5, 2, -4 })]
+    public void RearrangeArrayAlternateSigns(int[] nums, int[] expected)
+    {
+        int[] actual = sut.RearrangeArrayAlternateSigns(nums);
+        _logger.WriteLine($"Expected: {expected}, Actual: {actual}");
+        Assert.Equal(expected, actual);
+    }
+
+    [Theory]
+    [InlineData(new int[] { 1, 2, 3 }, new int[] { 1, 3, 2 })]
+    [InlineData(new int[] { 3, 2, 1 }, new int[] { 1, 2, 3 })]
+    [InlineData(new int[] { 2, 3, 1 }, new int[] { 3, 1, 2 })]
+    public void NextPermutation(int[] nums, int[] expected)
+    {
+        _logger.WriteLine($"Expected: {nums}");
+        sut.NextPermutation(nums);
+        _logger.WriteLine($"Actual: {nums}");
+        Assert.Equal(expected, nums);
+    } 
 }

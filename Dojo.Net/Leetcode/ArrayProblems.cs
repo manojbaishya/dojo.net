@@ -238,7 +238,7 @@ public class ArrayProblems
         Reverse(nums, m, N - 1);
     }
 
-    private void Reverse(int[] nums, int l, int r)
+    private static void Reverse(int[] nums, int l, int r)
     {
         while (l < r)
         {
@@ -415,7 +415,7 @@ public class ArrayProblems
     {
         int left = 0, mid = 0, right = nums.Length - 1;
 
-        while(mid <= right)
+        while (mid <= right)
         {
             if (nums[mid] == 0)
             {
@@ -436,15 +436,15 @@ public class ArrayProblems
     }
 
 
-    public int MajorityElement(int[] nums) 
+    public int MajorityElement(int[] nums)
     {
         Dictionary<int, int> freq = new(nums.Length);
-        for (int i = 0; i < nums.Length; i++) if(!freq.TryAdd(nums[i], 1)) freq[nums[i]]++;
-        foreach (KeyValuePair<int, int> pair in freq) if(pair.Value > (nums.Length / 2)) return pair.Key;
+        for (int i = 0; i < nums.Length; i++) if (!freq.TryAdd(nums[i], 1)) freq[nums[i]]++;
+        foreach (KeyValuePair<int, int> pair in freq) if (pair.Value > (nums.Length / 2)) return pair.Key;
         return default;
     }
 
-    public int MajorityElementMoore(int[] nums) 
+    public int MajorityElementMoore(int[] nums)
     {
         int element = default, count = 0;
 
@@ -452,20 +452,20 @@ public class ArrayProblems
         {
             if (count == 0) element = nums[i];
 
-            if (nums[i] == element) count++; 
+            if (nums[i] == element) count++;
             else count--;
         }
-        
+
         if (count == 0) return default;
-        
+
         int freq = 0;
-        for (int i = 0; i < nums.Length; i++) if (nums[i] == element) freq++;    
+        for (int i = 0; i < nums.Length; i++) if (nums[i] == element) freq++;
 
         if (freq > nums.Length / 2) return element;
         else return default;
     }
 
-    public int MaxSubArraySumKadane(int[] nums) 
+    public int MaxSubArraySumKadane(int[] nums)
     {
         int sum = 0, maxSum = int.MinValue;
         int start = -1, subStart = -1, subEnd = -1;
@@ -483,11 +483,11 @@ public class ArrayProblems
 
             if (sum < 0) sum = 0;
         }
-        
+
         return maxSum != int.MinValue ? maxSum : 0;
     }
 
-    public int MaxProfit(int[] prices) 
+    public int MaxProfit(int[] prices)
     {
         int minBuy = prices[0];
         int profit = 0;
@@ -500,5 +500,56 @@ public class ArrayProblems
         }
 
         return profit;
+    }
+
+    public int[] RearrangeArrayAlternateSigns(int[] nums)
+    {
+        int[] pos = new int[nums.Length / 2];
+        int[] neg = new int[nums.Length / 2];
+
+        int j = 0, k = 0;
+        for (int i = 0; i < nums.Length; i++)
+        {
+            if (nums[i] > 0)
+            {
+                pos[k] = nums[i];
+                k++;
+            }
+            else
+            {
+                neg[j] = nums[i];
+                j++;
+            }
+
+        }
+
+        for (int i = 0; i < nums.Length / 2; i++)
+        {
+            nums[2 * i] = pos[i];
+            nums[2 * i + 1] = neg[i];
+        }
+
+        return nums;
+    }
+
+    public void NextPermutation(int[] nums) 
+    {
+        int N = nums.Length;
+
+        int k = N - 2;
+        while(k >= 0 && nums[k] >= nums[k + 1]) k--;
+
+        if (k == -1)
+        { 
+            Reverse(nums, 0, N - 1);
+            return;
+        }
+
+        int l = N - 1;
+        while(l >= 0 && nums[k] >= nums[l]) l--;
+
+        (nums[l], nums[k]) = (nums[k], nums[l]);
+
+        Reverse(nums, k + 1, N - 1);
     }
 }

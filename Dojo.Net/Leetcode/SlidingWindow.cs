@@ -27,13 +27,8 @@ public class SlidingWindow
         for (int i = 0; i < nums.Length; i++)
         {
             if (window.Contains(nums[i])) return true;
-
             window.Add(nums[i]);
-
-            if (window.Count > k)
-            {
-                window.Remove(nums[i - k]);
-            }
+            if (window.Count > k) window.Remove(nums[i - k]);
         }
 
         return false;
