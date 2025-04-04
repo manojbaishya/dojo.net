@@ -486,4 +486,19 @@ public class ArrayProblems
         
         return maxSum != int.MinValue ? maxSum : 0;
     }
+
+    public int MaxProfit(int[] prices) 
+    {
+        int minBuy = prices[0];
+        int profit = 0;
+        int checkProfit = 0;
+        for (int i = 0; i < prices.Length; i++)
+        {
+            checkProfit = prices[i] - minBuy;
+            profit = Math.Max(checkProfit, profit);
+            minBuy = Math.Min(prices[i], minBuy);
+        }
+
+        return profit;
+    }
 }
