@@ -233,5 +233,14 @@ public class ArrayProblemsTests
         sut.NextPermutation(nums);
         _logger.WriteLine($"Actual: {nums}");
         Assert.Equal(expected, nums);
-    } 
+    }
+
+    [Theory]
+    [InlineData(new int[] { 16, 17, 4, 3, 5, 2 }, new int[] { 17, 5, 2 })]
+    public void Leaders(int[] nums, int[] expected)
+    {
+        int[] actual = [.. sut.Leaders(nums)];
+        _logger.WriteLine($"Expected: [{string.Join(",", expected)}], Actual: [{string.Join(",", actual)}]");
+        Assert.Equal(expected, actual);
+    }
 }

@@ -240,11 +240,12 @@ public class ArrayProblems
 
     private static void Reverse(int[] nums, int l, int r)
     {
-        while (l < r)
+        int left = l, right = r;
+        while (left < right)
         {
-            (nums[l], nums[r]) = (nums[r], nums[l]);
-            l++;
-            r--;
+            (nums[left], nums[right]) = (nums[right], nums[left]);
+            left++;
+            right--;
         }
     }
 
@@ -532,24 +533,69 @@ public class ArrayProblems
         return nums;
     }
 
-    public void NextPermutation(int[] nums) 
+    public void NextPermutation(int[] nums)
     {
         int N = nums.Length;
 
         int k = N - 2;
-        while(k >= 0 && nums[k] >= nums[k + 1]) k--;
+        while (k >= 0 && nums[k] >= nums[k + 1]) k--;
 
         if (k == -1)
-        { 
+        {
             Reverse(nums, 0, N - 1);
             return;
         }
 
         int l = N - 1;
-        while(l >= 0 && nums[k] >= nums[l]) l--;
+        while (l >= 0 && nums[k] >= nums[l]) l--;
 
         (nums[l], nums[k]) = (nums[k], nums[l]);
 
         Reverse(nums, k + 1, N - 1);
     }
+
+    public List<int> Leaders(int[] arr)
+    {
+        List<int> l = [];
+        int N = arr.Length;
+
+        int max = 0;
+        for (int i = N - 1; i >= 0; i--)
+        {
+            if (arr[i] >= max) l.Add(arr[i]);
+
+            max = Math.Max(max, arr[i]);
+        }
+
+        l.Reverse();
+
+        return l;
+    }
+
+    public int LongestConsecutive(int[] nums) 
+    {
+        if (nums.Length == 0) return 0;
+        
+        HashSet<int> ints = [.. nums];
+        
+        int max = int.MinValue;
+        int cnt = 0;
+        foreach(int num in ints)
+        {
+            if (ints.Contains(num - 1)) continue;
+
+            int nextNum = num;
+            while(ints.Contains(nextNum))
+            {
+                cnt++;
+                nextNum++;
+            }
+
+            max = Math.Max(max, cnt);
+            cnt = 0;
+        }
+
+        return max;
+    }
+
 }
