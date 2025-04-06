@@ -243,4 +243,22 @@ public class ArrayProblemsTests
         _logger.WriteLine($"Expected: [{string.Join(",", expected)}], Actual: [{string.Join(",", actual)}]");
         Assert.Equal(expected, actual);
     }
+
+    public static TheoryData<int[][], int[][]> JaggedArrayData => new()
+    {
+        {
+            new int[][] { [1, 2, 3], [4, 5, 6], [7, 8, 9] }, 
+            new int[][] { [7, 4, 1], [8, 5, 2], [9, 6, 3] }
+        }
+    };
+
+    [Theory]
+    [MemberData(nameof(JaggedArrayData))]
+    public void RotateImage(int[][] input, int[][] expected)
+    {
+        _logger.WriteLine($"Expected: {input}");
+        sut.RotateImage(input);
+        _logger.WriteLine($"Actual: {input}");
+        Assert.Equal(expected, input);
+    }
 }

@@ -650,4 +650,32 @@ public class ArrayProblems
             }
         }
     }
+
+    public void RotateImage(int[][] matrix) 
+    {
+        if (matrix.Length == 0) return;
+        int M = matrix.Length;
+        int N = matrix[0].Length;
+
+        // Transpose the matrix
+        Transpose(matrix);
+
+        // Reverse each row of the matrix
+        for (int i = 0; i < M; i++)
+        {
+            Reverse(matrix[i], 0, N - 1);
+        }
+    }
+
+    private static void Transpose(int[][] matrix)
+    {
+        int M = matrix.Length;
+        for (int i = 0; i < M; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                (matrix[i][j], matrix[j][i]) = (matrix[j][i], matrix[i][j]);
+            }
+        }
+    }
 }
