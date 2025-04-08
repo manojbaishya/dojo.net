@@ -1,7 +1,9 @@
-using System.Collections.Generic;
 using System.IO;
-using Dojo.Net.Leetcode;
+
 using dotenv.net;
+
+using Dojo.Net.Leetcode;
+
 using JetBrains.Annotations;
 
 using Xunit;
@@ -247,7 +249,7 @@ public class ArrayProblemsTests
     public static TheoryData<int[][], int[][]> JaggedArrayData => new()
     {
         {
-            new int[][] { [1, 2, 3], [4, 5, 6], [7, 8, 9] }, 
+            new int[][] { [1, 2, 3], [4, 5, 6], [7, 8, 9] },
             new int[][] { [7, 4, 1], [8, 5, 2], [9, 6, 3] }
         }
     };

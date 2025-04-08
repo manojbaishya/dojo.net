@@ -572,20 +572,20 @@ public class ArrayProblems
         return l;
     }
 
-    public int LongestConsecutive(int[] nums) 
+    public int LongestConsecutive(int[] nums)
     {
         if (nums.Length == 0) return 0;
-        
+
         HashSet<int> ints = [.. nums];
-        
+
         int max = int.MinValue;
         int cnt = 0;
-        foreach(int num in ints)
+        foreach (int num in ints)
         {
             if (ints.Contains(num - 1)) continue;
 
             int nextNum = num;
-            while(ints.Contains(nextNum))
+            while (ints.Contains(nextNum))
             {
                 cnt++;
                 nextNum++;
@@ -598,9 +598,9 @@ public class ArrayProblems
         return max;
     }
 
-       public void SetZeroes(int[][] matrix) 
+    public void SetZeroes(int[][] matrix)
     {
-        if (matrix.Length == 0) return; 
+        if (matrix.Length == 0) return;
         int M = matrix.Length;
         int N = matrix[0].Length;
 
@@ -612,7 +612,7 @@ public class ArrayProblems
                 if (matrix[i][j] == 0)
                 {
                     matrix[i][0] = 0;
-                    if ( j != 0)
+                    if (j != 0)
                         matrix[0][j] = 0;
                     else
                         col0 = 0;
@@ -651,7 +651,7 @@ public class ArrayProblems
         }
     }
 
-    public void RotateImage(int[][] matrix) 
+    public void RotateImage(int[][] matrix)
     {
         if (matrix.Length == 0) return;
         int M = matrix.Length;
@@ -677,5 +677,41 @@ public class ArrayProblems
                 (matrix[i][j], matrix[j][i]) = (matrix[j][i], matrix[i][j]);
             }
         }
+    }
+    public int[] SearchRange(int[] nums, int target)
+    {
+        int left = FindEnd(nums, target, "Left");
+        int right = FindEnd(nums, target, "Right");
+        return [left, right];
+    }
+
+    private int FindEnd(int[] nums, int target, string end)
+    {
+        int left = 0, right = nums.Length - 1;
+        int result = -1;
+
+        while (left <= right)
+        {
+            int mid = left + (right - left) / 2;
+
+            if (nums[mid] == target)
+            {
+                result = mid;
+                if (end.Equals("Left"))
+                    right = mid - 1;
+                else if (end.Equals("Right"))
+                    left = mid + 1;
+            }
+            else if (nums[mid] < target)
+            {
+                left = mid + 1;
+            }
+            else
+            {
+                right = mid - 1;
+            }
+        }
+
+        return result;
     }
 }
